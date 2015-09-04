@@ -1,0 +1,39 @@
+<dom-module id="nvd3-pie" layout horizontal center center-justified>
+	<link rel="import" type="css" href="nvd3-pie.css"/>
+	<template>
+	<style>
+		:host {
+			display: block;
+			font-family: Effra;
+			font-weight: 300;
+		}
+
+		:host #svg .nv-slice {
+			opacity: 0.7;
+		}
+
+		:host #svg .nv-slice.selected {
+			opacity: 1;
+		}
+
+		:host #svg .nv-label text {
+			font-size: 90%;
+			paint-order: stroke;
+			stroke: #f6f6f6;
+			stroke-width: 5px;
+		}
+
+		:host #svg .nv-pie-title {
+			font-weight: 400;
+		}
+
+		:host #svg .nv-label.selected {
+			font-weight: bold;
+		}
+	</style>
+		<svg id="svg" viewBox="{{ getViewBox(width, extraWidth, height) }}"></svg>
+	</template>
+	<script type="text/javascript" src="bower_components/d3/d3.js"></script>
+	<script type="text/javascript" src="bower_components/nvd3/build/nv.d3.js"></script>
+	<script type="text/javascript" src="nvd3-pie.js"></script>
+</dom-module>
