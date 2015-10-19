@@ -1,0 +1,28 @@
+:host {
+	display: block;
+	font-family: Effra;
+	font-weight: 300;
+}
+
+#svg .nv-slice {
+	opacity: 0.7;
+}
+
+#svg .nv-slice.selected {
+	opacity: 1;
+}
+
+#svg .nv-label text {
+	font-size: 90%;
+	paint-order: stroke;
+	stroke: #f6f6f6;
+	stroke-width: 5px;
+}
+
+#svg .nv-pie-title {
+	font-weight: 400;
+}
+
+#svg .nv-label.selected {
+	font-weight: bold;
+}

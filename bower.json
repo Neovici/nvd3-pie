@@ -1,0 +1,30 @@
+{
+  "name": "nvd3-pie",
+  "main": "nvd3-pie.html",
+  "version": "0.1.4",
+  "homepage": "https://github.com/Neovici/nvd3-pie",
+  "authors": [
+    "Neovici Development"
+  ],
+  "description": "Polymer component for nvd3 pie charts",
+  "keywords": [
+    "web-components",
+    "polymer",
+    "router",
+    "cosmoz"
+  ],
+  "license": "Apache 2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-flex-layout": "polymerelements/iron-flex-layout#~1.0.2",
+    "nvd3": "~1.8.1"
+  }
+}
