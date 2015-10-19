@@ -23,7 +23,8 @@
 			selection: {
 				type: Object,
 				value: null,
-				observer: '_selectionChanged'
+				observer: '_selectionChanged',
+				notify: true
 			},
 			showLabels: {
 				type: Boolean,
@@ -102,7 +103,7 @@
 				return;
 			}
 
-			console.log(slices, labels, this.data, this.selection);
+			// console.log(slices, labels, this.data, this.selection);
 
 			this.data.forEach(function (item, index) {
 
@@ -110,7 +111,7 @@
 					? that.selection.indexOf(item) > -1
 					: that.selection === item;
 
-				console.log(selected);
+				// console.log(selected);
 
 				if (selected) {
 					labels[index].classList.add('selected');
@@ -124,7 +125,6 @@
 		},
 
 		onElementClick: function (nvd3item) {
-			console.log(nvd3item);
 			var
 				item = nvd3item.data,
 				selected = this.multiSelection

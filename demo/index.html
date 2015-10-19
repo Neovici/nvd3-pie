@@ -10,26 +10,31 @@
 	<link rel="import" href="../nvd3-pie.html">
 </head>
 <body>
-	<nvd3-pie id="pie"></nvd3-pie>
+	<template is="dom-bind" id="t">
+		<nvd3-pie id="pie1" donut x-prop="name" y-prop="amount" pie-title="Suppliers" on-slice-selected="itemSelected" data="{{ data }}"></nvd3-pie>
+	</template>
 	<script type="text/javascript">
 /*global document, window */
 (function () {
 	"use strict";
 	window.addEventListener('WebComponentsReady', function () {
 		var
-			pieData = [{
-				label: "hej",
-				value: 10
-			}, {
-				label: "hej4",
-				value: 15
-			}],
-			pie = document.getElementById('pie');
-		pie.data = pieData;
-		window.setTimeout(function () {
-			pieData[0].value = 45;
-			pie.refresh();
-		}, 500);
+			pieDataJson = '[{"items":[{"registered":"2015-01-30","id":0},{"registered":"2015-03-06","id":1},{"registered":"2014-02-18","id":2}],"amount":3775,"name":"KENEGY"},{"items":[{"registered":"2015-01-30","id":0},{"registered":"2015-03-06","id":1},{"registered":"2014-02-18","id":2}],"amount":6479,"name":"FILODYNE"},{"items":[{"registered":"2015-01-30","id":0},{"registered":"2015-03-06","id":1},{"registered":"2014-02-18","id":2}],"amount":3523,"name":"PIVITOL"},{"items":[{"registered":"2015-01-30","id":0},{"registered":"2015-03-06","id":1},{"registered":"2014-02-18","id":2}],"amount":6182,"name":"GENEKOM"},{"items":[{"registered":"2015-01-30","id":0},{"registered":"2015-03-06","id":1},{"registered":"2014-02-18","id":2}],"amount":1233,"name":"COFINE"}]',
+			t = document.getElementById('t');
+
+		t.data = JSON.parse(pieDataJson);
+		t.itemSelected = function (e, d, s) {
+			if (!d.dataMassaged) {
+				d.items.forEach(function (diff, index) {
+					diff.registered = {
+						date: new Date(diff.registered),
+						format: 'date'
+					};
+				});
+				d.dataMassaged = true;
+			}
+			this.$.pie1.refresh();
+		};
 	});
 }());
 	</script>
