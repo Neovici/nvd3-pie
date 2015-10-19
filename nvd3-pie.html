@@ -1,3 +1,18 @@
+<link rel="import" type="css" href="../polymer/polymer.html"/>
+<link rel="stylesheet" type="text/css" href="../nvd3/build/nv.d3.css"/>
+
+<!--
+`<nvd3-pie>` is a wrapper for a NVD3-based pie chart
+
+### Usage
+
+    <nvd3-pie></nvd3-pie>
+
+@group NVD3 Charts
+@element nvd3-pie
+@demo demo/index.html
+-->
+
 <dom-module id="nvd3-pie" layout horizontal center center-justified>
 	<link rel="import" type="css" href="nvd3-pie.css"/>
 	<template>
@@ -33,7 +48,7 @@
 	</style>
 		<svg id="svg" viewBox="{{ getViewBox(width, extraWidth, height) }}"></svg>
 	</template>
-	<script type="text/javascript" src="bower_components/d3/d3.js"></script>
-	<script type="text/javascript" src="bower_components/nvd3/build/nv.d3.js"></script>
+	<script type="text/javascript" src="../d3/d3.js"></script>
+	<script type="text/javascript" src="../nvd3/build/nv.d3.js"></script>
 	<script type="text/javascript" src="nvd3-pie.js"></script>
 </dom-module>

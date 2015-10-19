@@ -59,7 +59,8 @@
 			},
 			tooltips: {
 				type: Boolean,
-				value: true
+				value: true,
+				reflectToAttribute: true
 			},
 			growOnHover: {
 				type: Boolean,
@@ -119,7 +120,7 @@
 					slices[index].classList.remove('selected');
 				}
 			});
-			this.fire('cz-chartselection', this.selection);
+			this.fire('slice-selected', this.selection);
 		},
 
 		onElementClick: function (nvd3item) {
