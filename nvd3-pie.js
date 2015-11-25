@@ -1,4 +1,4 @@
-/*global cz, document, Polymer, window, d3, nv */
+/*global Cosmoz, Polymer d3, nv*/
 (function () {
 
 	"use strict";
@@ -67,6 +67,14 @@
 				type: Boolean,
 				value: true
 			}
+		},
+
+		behaviors: [
+			Cosmoz.ViewInfoBehavior
+		],
+
+		listeners: {
+			'viewinfo-resize': 'refresh'
 		},
 
 		getViewBox: function (width, extraWidth, height) {
