@@ -1,4 +1,4 @@
-/*global Cosmoz, Polymer d3, nv*/
+/*global Cosmoz, Polymer, d3, nv*/
 (function () {
 
 	"use strict";
@@ -150,38 +150,38 @@
 			}
 		},
 		attached: function () {
-			this.async(function () {
-				var that = this;
-				nv.addGraph(function () {
-					that.nvd3chart = nv.models.pieChart()
-						.x(function (d) {
-							return d[that.xProp];
-						})
-						.y(function (d) {
-							return d[that.yProp];
-						})
-						.showLabels(that.showLabels)
-						.showLegend(that.showLegend)
-						.donut(that.donut)
-						.labelsOutside(true)
-						.growOnHover(that.growOnHover)
-						.title(that.pieTitle)
-						.width(that.width)
-						.height(that.height);
+			var that = this;
+			nv.addGraph(function () {
+				that.nvd3chart = nv.models.pieChart()
+					.x(function (d) {
+						return d[that.xProp];
+					})
+					.y(function (d) {
+						return d[that.yProp];
+					})
+					.showLabels(that.showLabels)
+					.showLegend(that.showLegend)
+					.donut(that.donut)
+					.labelsOutside(true)
+					.growOnHover(that.growOnHover)
+					.title(that.pieTitle)
+					.width(that.width)
+					.height(that.height);
 
-					that.nvd3chart.tooltip.enabled(that.tooltips);
+				that.nvd3chart.tooltip.enabled(that.tooltips);
 
-					that.nvd3chart.pie.dispatch.on("elementClick", that.onElementClick.bind(that));
+				that.nvd3chart.pie.dispatch.on("elementClick", that.onElementClick.bind(that));
 
-					d3.select(that.$.svg)
-						.attr("width", that.width + that.extraWidth)
-						.attr("height", that.height)
-						.datum(that.data)
-						.transition().duration(1200)
-						.call(that.nvd3chart);
+				var startData = that.data === undefined ? [] : that.data;
 
-					return that.nvd3chart;
-				});
+				d3.select(that.$.svg)
+					.attr("width", that.width + that.extraWidth)
+					.attr("height", that.height)
+					.datum(startData)
+					.transition().duration(1200)
+					.call(that.nvd3chart);
+
+				return that.nvd3chart;
 			});
 		},
 
