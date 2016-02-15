@@ -103,7 +103,6 @@
 
 		_selectionChanged: function () {
 			var
-				that = this,
 				slices = this.$.svg.querySelectorAll('.nv-pie .nv-slice'),
 				labels = this.$.svg.querySelectorAll('.nv-pieLabels .nv-label');
 
@@ -115,9 +114,9 @@
 
 			this.data.forEach(function (item, index) {
 
-				var selected = that.multiSelection
-					? that.selection.indexOf(item) > -1
-					: that.selection === item;
+				var selected = this.multiSelection
+					? this.selection.indexOf(item) > -1
+					: this.selection === item;
 
 				// console.log(selected);
 
@@ -128,7 +127,7 @@
 					labels[index].classList.remove('selected');
 					slices[index].classList.remove('selected');
 				}
-			});
+			}.bind(this));
 			this.fire('slice-selected', this.selection);
 		},
 
@@ -149,44 +148,46 @@
 				this.selection = item;
 			}
 		},
-		attached: function () {
-			var that = this;
+		ready: function () {
 			nv.addGraph(function () {
-				that.nvd3chart = nv.models.pieChart()
+				this.nvd3chart = nv.models.pieChart()
 					.x(function (d) {
-						return d[that.xProp];
-					})
+						return d[this.xProp];
+					}.bind(this))
 					.y(function (d) {
-						return d[that.yProp];
-					})
-					.showLabels(that.showLabels)
-					.showLegend(that.showLegend)
-					.donut(that.donut)
+						return d[this.yProp];
+					}.bind(this))
+					.showLabels(this.showLabels)
+					.showLegend(this.showLegend)
+					.donut(this.donut)
 					.labelsOutside(true)
-					.growOnHover(that.growOnHover)
-					.title(that.pieTitle)
-					.width(that.width)
-					.height(that.height);
+					.growOnHover(this.growOnHover)
+					.title(this.pieTitle)
+					.width(this.width)
+					.height(this.height);
 
-				that.nvd3chart.tooltip.enabled(that.tooltips);
+				this.nvd3chart.tooltip.enabled(this.tooltips);
 
-				that.nvd3chart.pie.dispatch.on("elementClick", that.onElementClick.bind(that));
+				this.nvd3chart.pie.dispatch.on("elementClick", this.onElementClick.bind(this));
 
-				var startData = that.data === undefined ? [] : that.data;
+				var startData = this.data === undefined ? [] : this.data;
 
-				d3.select(that.$.svg)
-					.attr("width", that.width + that.extraWidth)
-					.attr("height", that.height)
+				d3.select(this.$.svg)
+					.attr("width", this.width + this.extraWidth)
+					.attr("height", this.height)
 					.datum(startData)
 					.transition().duration(1200)
-					.call(that.nvd3chart);
+					.call(this.nvd3chart);
 
-				return that.nvd3chart;
-			});
+				return this.nvd3chart;
+			}.bind(this));
 		},
 
 		refresh: function () {
-			this.nvd3chart.update();
+			/* Can be refreshed before nvd3 has finished creating the nvd3chart object */
+			if (this.nvd3chart) {
+				this.nvd3chart.update();
+			}
 		},
 
 		_dataChanged: function () {
