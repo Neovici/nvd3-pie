@@ -1,4 +1,4 @@
-/*global Cosmoz, Polymer, d3, nv*/
+/*global Cosmoz, Polymer, d3, document, nv*/
 (function () {
 
 	"use strict";
@@ -66,6 +66,10 @@
 			growOnHover: {
 				type: Boolean,
 				value: true
+			},
+			_tooltipId: {
+				type: String,
+				readOnly: true
 			}
 		},
 
@@ -179,8 +183,16 @@
 					.transition().duration(1200)
 					.call(this.nvd3chart);
 
+				this._set_tooltipId(this.nvd3chart.tooltip.id());
 				return this.nvd3chart;
 			}.bind(this));
+		},
+
+		detached: function () {
+			var tooltip = document.getElementById(this._tooltipId);
+			if (tooltip) {
+				tooltip.remove();
+			}
 		},
 
 		refresh: function () {
