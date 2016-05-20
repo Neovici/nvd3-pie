@@ -48,7 +48,8 @@
 			},
 			pieTitle: {
 				type: String,
-				value: 'title'
+				value: 'title',
+				observer: '_pieTitleChanged'
 			},
 			xProp: {
 				type: String,
@@ -96,6 +97,12 @@
 			}
 			if (selectedLabel) {
 				selectedLabel.classList.remove('selected');
+			}
+		},
+
+		_pieTitleChanged: function (newValue, oldValue) {
+			if (this.nvd3chart !== undefined) {
+				this.nvd3chart.title(newValue);
 			}
 		},
 
